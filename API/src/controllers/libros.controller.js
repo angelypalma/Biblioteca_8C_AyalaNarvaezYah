@@ -1,5 +1,5 @@
 import { pool } from '../../db.js';
-
+//CONSULTAS DE A LA BASE DE DATOS
 export const masPrestados = async (_, res) => {
   try {
     const result = await pool.query(`
