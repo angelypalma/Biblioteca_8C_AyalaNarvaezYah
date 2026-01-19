@@ -4,8 +4,8 @@ export const masPrestados = async (_, res) => {
   try {
     const result = await pool.query(`
       SELECT l.titulo, COUNT(p.id) AS total
-      FROM "Libro" l
-      LEFT JOIN "Prestamo" p ON l.id = p.libro_id
+      FROM libro l
+      LEFT JOIN prestamo p ON l.id = p.libro_id
       GROUP BY l.titulo
       ORDER BY total DESC
     `);
@@ -20,9 +20,9 @@ export const menosPrestados = async (_, res) => {
   try {
     const result = await pool.query(`
       SELECT l.titulo, COUNT(p.id) AS total
-      FROM "Libro" l
-      LEFT JOIN "Prestamo" p ON l.id = p.libro_id
-      GROUP BY l.titulo
+      FROM libro l
+      LEFT JOIN prestamo p ON l.id = p.libro_id
+      GROUP BY l.id, l.titulo
       ORDER BY total ASC
     `);
     res.json(result.rows);
@@ -31,12 +31,13 @@ export const menosPrestados = async (_, res) => {
   }
 };
 
+
 export const generoMasVisitado = async (_, res) => {
   try {
     const result = await pool.query(`
-      SELECT l.genero, COUNT(*) AS total
-      FROM "Libro" l
-      JOIN "Prestamo" p ON l.id = p.libro_id
+      SELECT l.genero, COUNT(p.id) AS total
+      FROM libro l
+      JOIN prestamo p ON l.id = p.libro_id
       GROUP BY l.genero
       ORDER BY total DESC
       LIMIT 1
@@ -47,11 +48,12 @@ export const generoMasVisitado = async (_, res) => {
   }
 };
 
+
 export const stock = async (_, res) => {
   try {
     const result = await pool.query(`
       SELECT titulo, stock
-      FROM "Libro"
+      FROM libro
       LIMIT 4
     `);
     res.json(result.rows);
@@ -59,3 +61,4 @@ export const stock = async (_, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
