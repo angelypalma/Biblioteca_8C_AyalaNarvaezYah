@@ -1,4 +1,4 @@
-import { pool } from '../db.js';
+import { pool } from '../../db.js';
 
 export const masPrestados = async (_, res) => {
   const result = await pool.query(`

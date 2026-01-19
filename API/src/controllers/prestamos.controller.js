@@ -1,4 +1,4 @@
-import { pool } from '../db.js';
+import { pool } from '../../db.js';
 
 export const deudas5a10 = async (req, res) => {
   const result = await pool.query(`

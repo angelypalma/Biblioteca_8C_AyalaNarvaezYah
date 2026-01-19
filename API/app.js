@@ -1,8 +1,8 @@
 import express from 'express';
-import prestamosRoutes from './routes/prestamos.routes.js';
-import librosRoutes from './routes/libros.routes.js';
-import usuariosRoutes from './routes/usuarios.routes.js';
-import autoresRoutes from './routes/autores.routes.js';
+import prestamosRoutes from './src/routes/prestamos.routes.js';
+import librosRoutes from './src/routes/libros.routes.js';
+import usuariosRoutes from './src/routes/usuarios.routes.js';
+import autoresRoutes from './src/routes/autores.routes.js';
 
 const app = express();
 app.use(express.json());
