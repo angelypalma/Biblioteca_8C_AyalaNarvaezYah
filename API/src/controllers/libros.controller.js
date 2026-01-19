@@ -22,7 +22,7 @@ export const menosPrestados = async (_, res) => {
       SELECT l.titulo, COUNT(p.id) AS total
       FROM libro l
       LEFT JOIN prestamo p ON l.id = p.libro_id
-      GROUP BY l.id, l.titulo
+      GROUP BY l.titulo
       ORDER BY total ASC
     `);
     res.json(result.rows);
@@ -31,11 +31,10 @@ export const menosPrestados = async (_, res) => {
   }
 };
 
-
 export const generoMasVisitado = async (_, res) => {
   try {
     const result = await pool.query(`
-      SELECT l.genero, COUNT(p.id) AS total
+      SELECT l.genero, COUNT(*) AS total
       FROM libro l
       JOIN prestamo p ON l.id = p.libro_id
       GROUP BY l.genero
@@ -47,7 +46,6 @@ export const generoMasVisitado = async (_, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 
 export const stock = async (_, res) => {
   try {
@@ -61,4 +59,3 @@ export const stock = async (_, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
